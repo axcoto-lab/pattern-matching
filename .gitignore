@@ -1,2 +1,3 @@
 data
 data_no_split
+data/*.txt
