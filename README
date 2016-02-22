@@ -1,0 +1,10 @@
+# Run
+
+Create a list of hostname, store in a file name `data` in current directory and
+invoke it with rake:
+
+```
+rake
+# Or to run on a different data source:
+rake 'run[data]'
+```
