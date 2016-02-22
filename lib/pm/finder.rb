@@ -6,7 +6,7 @@ module PM
 
   class Finder
     attr_reader :patterns, :hostnames
-    THRESHOLD = 3
+    THRESHOLD = 1
 
     def initialize(hostnames)
       @hostnames = hostnames
@@ -31,7 +31,7 @@ module PM
       host_segments = pm.analyze
       sorted_words = pm.count(host_segments)
 
-      #sorted_words.reject! { |v| v[1] <= THRESHOLD }
+      sorted_words.reject! { |v| v[1] <= THRESHOLD }
 
       pp sorted_words
       pm

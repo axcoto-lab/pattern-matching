@@ -13,7 +13,7 @@ module PM
           words = []
           name.length.times do |i|
             value = name[0..i]
-            value = value.sub(/^[\s0-9]+/, '')
+                          .sub(/^[\s0-9]+/, '')
                           .sub(/[\s0-9]+$/, '')
                           .strip
             words << value unless words.include? value
@@ -26,12 +26,14 @@ module PM
           sub_matched     = 0
           exactly_matched = 0
 
+          # If a word is a sub strig of another words, we count the occurence
+          # of that parent words. If parent words occurs more often than sub words
+          # we choose parent words, and dismissed sub words
           hostnames.each do |h|
             if h.include?(name) && h.length > name.length
               if count_occurence(hostnames, h) >= 2
                 sub_matched += 1
               end
-              puts "Occurence of #{h} #{count_occurence(hostnames, h)}"
             end
             if h == name
               exactly_matched += 1
