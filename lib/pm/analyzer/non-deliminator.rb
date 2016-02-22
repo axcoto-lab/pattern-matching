@@ -22,6 +22,8 @@ module PM
         # If a word is a sub strig of another words, we count the occurence
         # of that parent words. If parent words occurs more often than sub words
         # we choose parent words, and dismissed sub words
+        # Otherwise, if the parent words occurs less often that the full words,
+        # let's picked the full words 
         @hostnames.each do |h|
           if h.include?(name) && h.length > name.length
             if count_occurence(h) >= 2
