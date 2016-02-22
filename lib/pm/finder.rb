@@ -1,5 +1,6 @@
 require 'pp'
 require_relative './analyzer/simple'
+require_relative './analyzer/non-deliminator'
 
 module PM
 
@@ -19,7 +20,7 @@ module PM
 
     # Analyze data
     def analyze
-      analyzer = Object.const_get("PM::Analyzer::Simple").new
+      analyzer = Object.const_get("PM::Analyzer::#{ENV['ANALYZER'] || 'Simple'}").new
       analyzer.analyze(@hostnames)
     end
 

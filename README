@@ -6,5 +6,11 @@ invoke it with rake:
 ```
 rake
 # Or to run on a different data source:
-rake 'run[data]'
+rake 'run[data/small.txt]'
+```
+
+To invoke with custom analyzer:
+
+```
+ANALYZER=NonDeliminator rake 'run[data/no-pattern.txt]'
 ```
