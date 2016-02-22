@@ -5,7 +5,8 @@ module PM
 
   class Finder
     attr_reader :patterns, :hostnames
-    
+    THRESHOLD = 3
+
     def initialize(hostnames)
       @hostnames = hostnames
 
@@ -16,8 +17,7 @@ module PM
       @patterns += str
     end
 
-    def analyze()
-      puts "Simple analyze result"
+    def analyze
       analyzer = Object.const_get("PM::Analyzer::Simple").new
       analyzer.analyze(@hostnames)
     end
@@ -28,6 +28,8 @@ module PM
       host_segments = pm.analyze
       sorted_words = pm.count(host_segments)
 
+      sorted_words.reject! { |v| v[1] <= THRESHOLD }
+
       pp sorted_words
       pm
     end
@@ -35,7 +37,8 @@ module PM
     def count(array)
       occurences = {}
       array.each do |value|
-        if occurences[value].nil?
+        value.downcase!
+        if occurences[value.downcase].nil?
           occurences[value] = 1
         else
           occurences[value] += 1
