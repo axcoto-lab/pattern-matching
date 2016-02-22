@@ -17,6 +17,7 @@ module PM
       @patterns += str
     end
 
+    # Analyze data
     def analyze
       analyzer = Object.const_get("PM::Analyzer::Simple").new
       analyzer.analyze(@hostnames)

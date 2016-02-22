@@ -1,6 +1,6 @@
 module PM
   module Input
-    TOKEN_SEP = [':', '-', ' ', '_', ';', ',']
+    TOKEN_SEP = [':', '-', ' ', '_', ';', ',', '.']
 
     class << self
       def read(source)

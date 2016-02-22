@@ -2,19 +2,12 @@ module PM
   module Analyzer
     # Simple analyzer, turn hostname into tokens and count the occurence
     class Simple
-      TOKEN_SEP = ['-', '_', ':', ' ', ';', ',']
+      TOKEN_SEP = ['-', '_', ':', ' ', ';', ',', '.']
 
       def tokenize(hostnames)
         hostnames.map do |name|
-          words = []
-          TOKEN_SEP.each do |splitor|
-            if name.include? splitor
-              words << name.split(splitor).map { |segment| PM::Input.strip(segment, TOKEN_SEP) }
-              break
-            end
-          end
-          words
-        end.reject!(&:empty?).flatten
+          name.split(/[-_\:\s;,\.]/).map { |v| PM::Input.strip(v, TOKEN_SEP) }
+        end.flatten.reject(&:empty?)
       end
 
       def analyze(hostnames)
